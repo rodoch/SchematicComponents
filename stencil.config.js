@@ -1,5 +1,7 @@
+const sass = require('@stencil/sass');
+
 exports.config = {
-  namespace: 'mycomponent',
+  namespace: 'schematic',
   outputTargets:[
     {
       type: 'dist'
@@ -8,5 +10,8 @@ exports.config = {
       type: 'www',
       serviceWorker: false
     }
+  ],
+  plugins: [
+    sass()
   ]
 };

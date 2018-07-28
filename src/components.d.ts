@@ -60,6 +60,150 @@ declare global {
   }
 }
 
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceEditor {
+      'clearEditor': () => void;
+      'openEditor': (url: string, id: string) => void;
+      'resourceId': string;
+      'url': string;
+    }
+  }
+
+  interface HTMLSchematicResourceEditorElement extends StencilComponents.SchematicResourceEditor, HTMLStencilElement {}
+
+  var HTMLSchematicResourceEditorElement: {
+    prototype: HTMLSchematicResourceEditorElement;
+    new (): HTMLSchematicResourceEditorElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-editor': HTMLSchematicResourceEditorElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-editor': HTMLSchematicResourceEditorElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-editor': JSXElements.SchematicResourceEditorAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceEditorAttributes extends HTMLAttributes {
+      'resourceId'?: string;
+      'url'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceExplorer {
+      'clearResourceList': () => void;
+      'listResources': (url: string, formData?: FormData) => void;
+      'url': string;
+    }
+  }
+
+  interface HTMLSchematicResourceExplorerElement extends StencilComponents.SchematicResourceExplorer, HTMLStencilElement {}
+
+  var HTMLSchematicResourceExplorerElement: {
+    prototype: HTMLSchematicResourceExplorerElement;
+    new (): HTMLSchematicResourceExplorerElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-explorer': HTMLSchematicResourceExplorerElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-explorer': HTMLSchematicResourceExplorerElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-explorer': JSXElements.SchematicResourceExplorerAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceExplorerAttributes extends HTMLAttributes {
+      'url'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceListLink {
+      'content': string;
+      'resourceId': string;
+      'status': string;
+    }
+  }
+
+  interface HTMLSchematicResourceListLinkElement extends StencilComponents.SchematicResourceListLink, HTMLStencilElement {}
+
+  var HTMLSchematicResourceListLinkElement: {
+    prototype: HTMLSchematicResourceListLinkElement;
+    new (): HTMLSchematicResourceListLinkElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-list-link': HTMLSchematicResourceListLinkElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-list-link': HTMLSchematicResourceListLinkElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-list-link': JSXElements.SchematicResourceListLinkAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceListLinkAttributes extends HTMLAttributes {
+      'content'?: string;
+      'resourceId'?: string;
+      'status'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceSearch {
+      'placeholder': string;
+      'url': string;
+    }
+  }
+
+  interface HTMLSchematicResourceSearchElement extends StencilComponents.SchematicResourceSearch, HTMLStencilElement {}
+
+  var HTMLSchematicResourceSearchElement: {
+    prototype: HTMLSchematicResourceSearchElement;
+    new (): HTMLSchematicResourceSearchElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-search': HTMLSchematicResourceSearchElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-search': HTMLSchematicResourceSearchElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-search': JSXElements.SchematicResourceSearchAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceSearchAttributes extends HTMLAttributes {
+      'placeholder'?: string;
+      'url'?: string;
+    }
+  }
+}
+
 declare global { namespace JSX { interface StencilJSX {} } }
 
 export declare function defineCustomElements(window: any): void;
