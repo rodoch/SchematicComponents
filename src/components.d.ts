@@ -64,10 +64,51 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface SchematicResourceEditorToolbar {
+
+    }
+  }
+
+  interface HTMLSchematicResourceEditorToolbarElement extends StencilComponents.SchematicResourceEditorToolbar, HTMLStencilElement {}
+
+  var HTMLSchematicResourceEditorToolbarElement: {
+    prototype: HTMLSchematicResourceEditorToolbarElement;
+    new (): HTMLSchematicResourceEditorToolbarElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-editor-toolbar': HTMLSchematicResourceEditorToolbarElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-editor-toolbar': HTMLSchematicResourceEditorToolbarElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-editor-toolbar': JSXElements.SchematicResourceEditorToolbarAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceEditorToolbarAttributes extends HTMLAttributes {
+      'onCreateNewResource'?: (event: CustomEvent) => void;
+      'onDeleteCurrentResouce'?: (event: CustomEvent) => void;
+      'onGetNewResource'?: (event: CustomEvent) => void;
+      'onUpdateCurrentResource'?: (event: CustomEvent) => void;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface SchematicResourceEditor {
       'clearEditor': () => void;
-      'openEditor': (url: string, id: string) => void;
+      'createResource': () => void;
+      'deleteResource': (id: string) => void;
+      'newResource': () => void;
+      'placeholder': string;
+      'readResource': (id: string) => void;
       'resourceId': string;
+      'updateResource': (id: string) => void;
       'url': string;
     }
   }
@@ -91,6 +132,7 @@ declare global {
   }
   namespace JSXElements {
     export interface SchematicResourceEditorAttributes extends HTMLAttributes {
+      'placeholder'?: string;
       'resourceId'?: string;
       'url'?: string;
     }
@@ -101,32 +143,32 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface SchematicResourceExplorer {
-      'clearResourceList': () => void;
-      'listResources': (url: string, formData?: FormData) => void;
+    interface SchematicResourceFilters {
+      'clearFilters': () => void;
+      'openFilters': (url: string) => void;
       'url': string;
     }
   }
 
-  interface HTMLSchematicResourceExplorerElement extends StencilComponents.SchematicResourceExplorer, HTMLStencilElement {}
+  interface HTMLSchematicResourceFiltersElement extends StencilComponents.SchematicResourceFilters, HTMLStencilElement {}
 
-  var HTMLSchematicResourceExplorerElement: {
-    prototype: HTMLSchematicResourceExplorerElement;
-    new (): HTMLSchematicResourceExplorerElement;
+  var HTMLSchematicResourceFiltersElement: {
+    prototype: HTMLSchematicResourceFiltersElement;
+    new (): HTMLSchematicResourceFiltersElement;
   };
   interface HTMLElementTagNameMap {
-    'schematic-resource-explorer': HTMLSchematicResourceExplorerElement;
+    'schematic-resource-filters': HTMLSchematicResourceFiltersElement;
   }
   interface ElementTagNameMap {
-    'schematic-resource-explorer': HTMLSchematicResourceExplorerElement;
+    'schematic-resource-filters': HTMLSchematicResourceFiltersElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      'schematic-resource-explorer': JSXElements.SchematicResourceExplorerAttributes;
+      'schematic-resource-filters': JSXElements.SchematicResourceFiltersAttributes;
     }
   }
   namespace JSXElements {
-    export interface SchematicResourceExplorerAttributes extends HTMLAttributes {
+    export interface SchematicResourceFiltersAttributes extends HTMLAttributes {
       'url'?: string;
     }
   }
@@ -137,7 +179,6 @@ declare global {
 
   namespace StencilComponents {
     interface SchematicResourceListLink {
-      'content': string;
       'resourceId': string;
       'status': string;
     }
@@ -162,9 +203,46 @@ declare global {
   }
   namespace JSXElements {
     export interface SchematicResourceListLinkAttributes extends HTMLAttributes {
-      'content'?: string;
+      'onSetActiveResource'?: (event: CustomEvent) => void;
       'resourceId'?: string;
       'status'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceList {
+      'activeResourceId': string;
+      'clearResourceList': () => void;
+      'listResources': (url: string, formData?: FormData) => void;
+      'url': string;
+    }
+  }
+
+  interface HTMLSchematicResourceListElement extends StencilComponents.SchematicResourceList, HTMLStencilElement {}
+
+  var HTMLSchematicResourceListElement: {
+    prototype: HTMLSchematicResourceListElement;
+    new (): HTMLSchematicResourceListElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-list': HTMLSchematicResourceListElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-list': HTMLSchematicResourceListElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-list': JSXElements.SchematicResourceListAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceListAttributes extends HTMLAttributes {
+      'activeResourceId'?: string;
+      'url'?: string;
     }
   }
 }

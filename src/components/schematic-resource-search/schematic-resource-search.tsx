@@ -20,8 +20,8 @@ export class ResourceSearch {
         let formData: FormData = new FormData();
         formData.append('query', this.value);
 
-        const explorer = document.querySelector('schematic-resource-explorer');
-        explorer.listResources(this.url, formData);
+        const list = document.querySelector('schematic-resource-list');
+        list.listResources(this.url, formData);
     }
 
     render() {

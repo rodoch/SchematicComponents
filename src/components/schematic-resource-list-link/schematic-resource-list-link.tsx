@@ -1,4 +1,5 @@
-import { Component, Prop, Element } from '@stencil/core';
+import { Component, Element, Prop, Event, EventEmitter, Watch } from '@stencil/core';
+import scrollIntoView from 'scroll-into-view-if-needed'
 
 @Component({
     tag: 'schematic-resource-list-link',
@@ -6,39 +7,59 @@ import { Component, Prop, Element } from '@stencil/core';
 })
 
 export class ResourceListLink {
-    @Prop() resourceId: string;
-    @Prop() content: string;
-    @Prop() status: string;
-
     @Element() link: HTMLStencilElement;
+    @Prop() resourceId: string;
+    @Prop({ mutable: true, reflectToAttr: true }) status: string;
+    @Event() setActiveResource: EventEmitter;
 
-    unsetActiveResource() {
-        const explorer = document.querySelector('schematic-resource-explorer');
-        const resources = explorer.querySelectorAll('.resource-list__item');
+    componentDidLoad() {
+        this.setActiveStatus();
+    }
 
-        for (let i = 0; i < resources.length; ++i) {
-            let resource = resources[i].querySelector('.resource-list__link');
-            if (resource.classList.contains('resource-list__link--active')) {
-                resource.classList.remove('resource-list__link--active');
-            }
+    @Watch('status')
+    statusChanged() {
+        this.setActiveStatus();
+    }
+
+    setActiveStatus() {
+        const link = this.link.querySelector('.resource-list__link');
+        
+        if (this.status === 'active') {
+            this.activateLink(link);
+        } else {
+            this.deactivateLink(link);
         }
     }
 
-    setActiveResource() {
-        this.unsetActiveResource();
-        this.link.querySelector('.resource-list__link').classList.add('resource-list__link--active');
+    activateLink(link: Element) {
+        this.setActiveResource.emit(this.resourceId);
+        link.classList.add('resource-list__link--active');
+        scrollIntoView(this.link, {
+            behavior: 'smooth',
+            scrollMode: 'if-needed'
+        });
+    }
+
+    deactivateLink(link: Element) {
+        link.classList.remove('resource-list__link--active');
     }
 
     linkClick(event: UIEvent) {
         event.preventDefault();
-        this.setActiveResource();
+        this.status = "active";
+        this.updateEditor();
+    }
+
+    updateEditor() {
         const editor = document.querySelector('schematic-resource-editor');
-        editor.openEditor(editor.url, this.resourceId);
+        editor.setAttribute('resource-id', this.resourceId);
     }
 
     render() {
         return(
-            <a class="resource-list__link" href="" onClick={(event: UIEvent) => this.linkClick(event)}>{this.content}</a>
+            <a class="resource-list__link" href="" onClick={(event: UIEvent) => this.linkClick(event)}>
+                <slot/>
+            </a>
         );
     }
 }
