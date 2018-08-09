@@ -64,6 +64,218 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface SchematicLoading {
+
+    }
+  }
+
+  interface HTMLSchematicLoadingElement extends StencilComponents.SchematicLoading, HTMLStencilElement {}
+
+  var HTMLSchematicLoadingElement: {
+    prototype: HTMLSchematicLoadingElement;
+    new (): HTMLSchematicLoadingElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-loading': HTMLSchematicLoadingElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-loading': HTMLSchematicLoadingElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-loading': JSXElements.SchematicLoadingAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicLoadingAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceButtonCreate {
+      'completed': string;
+      'inProgress': string;
+    }
+  }
+
+  interface HTMLSchematicResourceButtonCreateElement extends StencilComponents.SchematicResourceButtonCreate, HTMLStencilElement {}
+
+  var HTMLSchematicResourceButtonCreateElement: {
+    prototype: HTMLSchematicResourceButtonCreateElement;
+    new (): HTMLSchematicResourceButtonCreateElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-button-create': HTMLSchematicResourceButtonCreateElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-button-create': HTMLSchematicResourceButtonCreateElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-button-create': JSXElements.SchematicResourceButtonCreateAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceButtonCreateAttributes extends HTMLAttributes {
+      'completed'?: string;
+      'inProgress'?: string;
+      'onCreateNewResource'?: (event: CustomEvent) => void;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceButtonDelete {
+      'completed': string;
+      'inProgress': string;
+    }
+  }
+
+  interface HTMLSchematicResourceButtonDeleteElement extends StencilComponents.SchematicResourceButtonDelete, HTMLStencilElement {}
+
+  var HTMLSchematicResourceButtonDeleteElement: {
+    prototype: HTMLSchematicResourceButtonDeleteElement;
+    new (): HTMLSchematicResourceButtonDeleteElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-button-delete': HTMLSchematicResourceButtonDeleteElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-button-delete': HTMLSchematicResourceButtonDeleteElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-button-delete': JSXElements.SchematicResourceButtonDeleteAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceButtonDeleteAttributes extends HTMLAttributes {
+      'completed'?: string;
+      'inProgress'?: string;
+      'onDeleteCurrentResouce'?: (event: CustomEvent) => void;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceButtonNew {
+      'completed': string;
+      'inProgress': string;
+    }
+  }
+
+  interface HTMLSchematicResourceButtonNewElement extends StencilComponents.SchematicResourceButtonNew, HTMLStencilElement {}
+
+  var HTMLSchematicResourceButtonNewElement: {
+    prototype: HTMLSchematicResourceButtonNewElement;
+    new (): HTMLSchematicResourceButtonNewElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-button-new': HTMLSchematicResourceButtonNewElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-button-new': HTMLSchematicResourceButtonNewElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-button-new': JSXElements.SchematicResourceButtonNewAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceButtonNewAttributes extends HTMLAttributes {
+      'completed'?: string;
+      'inProgress'?: string;
+      'onGetNewResource'?: (event: CustomEvent) => void;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceButtonSave {
+      'completed': string;
+      'inProgress': string;
+    }
+  }
+
+  interface HTMLSchematicResourceButtonSaveElement extends StencilComponents.SchematicResourceButtonSave, HTMLStencilElement {}
+
+  var HTMLSchematicResourceButtonSaveElement: {
+    prototype: HTMLSchematicResourceButtonSaveElement;
+    new (): HTMLSchematicResourceButtonSaveElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-button-save': HTMLSchematicResourceButtonSaveElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-button-save': HTMLSchematicResourceButtonSaveElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-button-save': JSXElements.SchematicResourceButtonSaveAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceButtonSaveAttributes extends HTMLAttributes {
+      'completed'?: string;
+      'inProgress'?: string;
+      'onUpdateCurrentResource'?: (event: CustomEvent) => void;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceEditorStatus {
+      'message': string;
+      'status': string;
+    }
+  }
+
+  interface HTMLSchematicResourceEditorStatusElement extends StencilComponents.SchematicResourceEditorStatus, HTMLStencilElement {}
+
+  var HTMLSchematicResourceEditorStatusElement: {
+    prototype: HTMLSchematicResourceEditorStatusElement;
+    new (): HTMLSchematicResourceEditorStatusElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-editor-status': HTMLSchematicResourceEditorStatusElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-editor-status': HTMLSchematicResourceEditorStatusElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-editor-status': JSXElements.SchematicResourceEditorStatusAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceEditorStatusAttributes extends HTMLAttributes {
+      'message'?: string;
+      'status'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface SchematicResourceEditorToolbar {
 
     }
@@ -88,10 +300,7 @@ declare global {
   }
   namespace JSXElements {
     export interface SchematicResourceEditorToolbarAttributes extends HTMLAttributes {
-      'onCreateNewResource'?: (event: CustomEvent) => void;
-      'onDeleteCurrentResouce'?: (event: CustomEvent) => void;
-      'onGetNewResource'?: (event: CustomEvent) => void;
-      'onUpdateCurrentResource'?: (event: CustomEvent) => void;
+
     }
   }
 }
@@ -102,13 +311,16 @@ declare global {
   namespace StencilComponents {
     interface SchematicResourceEditor {
       'clearEditor': () => void;
-      'createResource': () => void;
-      'deleteResource': (id: string) => void;
-      'newResource': () => void;
+      'createResource': (messageOnComplete: string) => void;
+      'deleteResource': (id: string, messageOnComplete: string) => void;
+      'newResource': (messageOnComplete: string) => void;
+      'noContent': string;
       'placeholder': string;
-      'readResource': (id: string) => void;
+      'readCompleted': string;
+      'readInProgress': string;
+      'readResource': (id: string, messageOnComplete: string) => void;
       'resourceId': string;
-      'updateResource': (id: string) => void;
+      'updateResource': (id: string, messageOnComplete: string) => void;
       'url': string;
     }
   }
@@ -132,9 +344,46 @@ declare global {
   }
   namespace JSXElements {
     export interface SchematicResourceEditorAttributes extends HTMLAttributes {
+      'noContent'?: string;
+      'onResourceRefresh'?: (event: CustomEvent) => void;
       'placeholder'?: string;
+      'readCompleted'?: string;
+      'readInProgress'?: string;
       'resourceId'?: string;
       'url'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceExplorer {
+
+    }
+  }
+
+  interface HTMLSchematicResourceExplorerElement extends StencilComponents.SchematicResourceExplorer, HTMLStencilElement {}
+
+  var HTMLSchematicResourceExplorerElement: {
+    prototype: HTMLSchematicResourceExplorerElement;
+    new (): HTMLSchematicResourceExplorerElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-explorer': HTMLSchematicResourceExplorerElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-explorer': HTMLSchematicResourceExplorerElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-explorer': JSXElements.SchematicResourceExplorerAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceExplorerAttributes extends HTMLAttributes {
+
     }
   }
 }
@@ -203,7 +452,7 @@ declare global {
   }
   namespace JSXElements {
     export interface SchematicResourceListLinkAttributes extends HTMLAttributes {
-      'onSetActiveResource'?: (event: CustomEvent) => void;
+      'onActiveResourceSet'?: (event: CustomEvent) => void;
       'resourceId'?: string;
       'status'?: string;
     }
@@ -218,6 +467,8 @@ declare global {
       'activeResourceId': string;
       'clearResourceList': () => void;
       'listResources': (url: string, formData?: FormData) => void;
+      'newResource': () => void;
+      'noContent': string;
       'url': string;
     }
   }
@@ -242,7 +493,149 @@ declare global {
   namespace JSXElements {
     export interface SchematicResourceListAttributes extends HTMLAttributes {
       'activeResourceId'?: string;
+      'noContent'?: string;
+      'onActiveResourceSet'?: (event: CustomEvent) => void;
       'url'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceRepeaterDelete {
+
+    }
+  }
+
+  interface HTMLSchematicResourceRepeaterDeleteElement extends StencilComponents.SchematicResourceRepeaterDelete, HTMLStencilElement {}
+
+  var HTMLSchematicResourceRepeaterDeleteElement: {
+    prototype: HTMLSchematicResourceRepeaterDeleteElement;
+    new (): HTMLSchematicResourceRepeaterDeleteElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-repeater-delete': HTMLSchematicResourceRepeaterDeleteElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-repeater-delete': HTMLSchematicResourceRepeaterDeleteElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-repeater-delete': JSXElements.SchematicResourceRepeaterDeleteAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceRepeaterDeleteAttributes extends HTMLAttributes {
+      'onDeleteRepeatable'?: (event: CustomEvent) => void;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceRepeatable {
+      'deleteButton': string;
+      'index': string;
+      'isRequired': boolean;
+      'model': string;
+    }
+  }
+
+  interface HTMLSchematicResourceRepeatableElement extends StencilComponents.SchematicResourceRepeatable, HTMLStencilElement {}
+
+  var HTMLSchematicResourceRepeatableElement: {
+    prototype: HTMLSchematicResourceRepeatableElement;
+    new (): HTMLSchematicResourceRepeatableElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-repeatable': HTMLSchematicResourceRepeatableElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-repeatable': HTMLSchematicResourceRepeatableElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-repeatable': JSXElements.SchematicResourceRepeatableAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceRepeatableAttributes extends HTMLAttributes {
+      'deleteButton'?: string;
+      'index'?: string;
+      'isRequired'?: boolean;
+      'model'?: string;
+      'onResourceRepeated'?: (event: CustomEvent) => void;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceRepeaterButton {
+      'url': string;
+    }
+  }
+
+  interface HTMLSchematicResourceRepeaterButtonElement extends StencilComponents.SchematicResourceRepeaterButton, HTMLStencilElement {}
+
+  var HTMLSchematicResourceRepeaterButtonElement: {
+    prototype: HTMLSchematicResourceRepeaterButtonElement;
+    new (): HTMLSchematicResourceRepeaterButtonElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-repeater-button': HTMLSchematicResourceRepeaterButtonElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-repeater-button': HTMLSchematicResourceRepeaterButtonElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-repeater-button': JSXElements.SchematicResourceRepeaterButtonAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceRepeaterButtonAttributes extends HTMLAttributes {
+      'url'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceRepeater {
+      'minInstances': number;
+      'sequenceRepeatables': () => void;
+    }
+  }
+
+  interface HTMLSchematicResourceRepeaterElement extends StencilComponents.SchematicResourceRepeater, HTMLStencilElement {}
+
+  var HTMLSchematicResourceRepeaterElement: {
+    prototype: HTMLSchematicResourceRepeaterElement;
+    new (): HTMLSchematicResourceRepeaterElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-repeater': HTMLSchematicResourceRepeaterElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-repeater': HTMLSchematicResourceRepeaterElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-repeater': JSXElements.SchematicResourceRepeaterAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceRepeaterAttributes extends HTMLAttributes {
+      'minInstances'?: number;
     }
   }
 }

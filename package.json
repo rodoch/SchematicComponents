@@ -18,7 +18,8 @@
   "dependencies": {
     "@stencil/state-tunnel": "0.0.7",
     "popmotion": "^8.3.3",
-    "scroll-into-view-if-needed": "^2.2.16"
+    "scroll-into-view-if-needed": "^2.2.16",
+    "stylefire": "^2.0.6"
   },
   "devDependencies": {
     "@stencil/core": "^0.10.0",

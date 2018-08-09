@@ -10,30 +10,40 @@ export class ResourceListLink {
     @Element() link: HTMLStencilElement;
     @Prop() resourceId: string;
     @Prop({ mutable: true, reflectToAttr: true }) status: string;
-    @Event() setActiveResource: EventEmitter;
-
-    componentDidLoad() {
-        this.setActiveStatus();
-    }
+    @Event() activeResourceSet: EventEmitter;
 
     @Watch('status')
     statusChanged() {
         this.setActiveStatus();
     }
 
+    componentDidLoad() {
+        if (this.status === 'active') {
+            this.setActiveStatus();
+        }
+    }
+
     setActiveStatus() {
         const link = this.link.querySelector('.resource-list__link');
         
-        if (this.status === 'active') {
-            this.activateLink(link);
-        } else {
-            this.deactivateLink(link);
+        switch (this.status)
+        {
+            case 'active':
+                this.activateLink(link);
+                break;
+            default:
+                this.deactivateLink(link);
+                break;
         }
     }
 
     activateLink(link: Element) {
-        this.setActiveResource.emit(this.resourceId);
+        if (this.resourceId === "0") {
+            return;
+        }
+
         link.classList.add('resource-list__link--active');
+        
         scrollIntoView(this.link, {
             behavior: 'smooth',
             scrollMode: 'if-needed'
@@ -46,13 +56,7 @@ export class ResourceListLink {
 
     linkClick(event: UIEvent) {
         event.preventDefault();
-        this.status = "active";
-        this.updateEditor();
-    }
-
-    updateEditor() {
-        const editor = document.querySelector('schematic-resource-editor');
-        editor.setAttribute('resource-id', this.resourceId);
+        this.activeResourceSet.emit(this.resourceId);
     }
 
     render() {
