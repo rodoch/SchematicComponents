@@ -2,7 +2,8 @@ import { Component, Event, EventEmitter, Prop } from '@stencil/core';
 import { ResourceButton } from '../../interfaces/ResourceButton';
 
 @Component({
-    tag: 'schematic-resource-button-delete'
+    tag: 'schematic-resource-button-delete',
+    styleUrl: 'schematic-resource-button-delete.scss'
 })
 
 export class ResourceButtonDelete {
@@ -24,7 +25,7 @@ export class ResourceButtonDelete {
     render() {
         return (
             <li class="resource-toolbar__item">
-                <button onClick={(event: UIEvent) => this.deleteButton(event)}>
+                <button class="resource-button--delete" onClick={(event: UIEvent) => this.deleteButton(event)}>
                     <slot/>
                 </button>
             </li>

@@ -29,33 +29,68 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface MyComponent {
-      'first': string;
-      'last': string;
+    interface SchematicLanguageButton {
+      'code': string;
+      'setHref': () => void;
+      'text': string;
     }
   }
 
-  interface HTMLMyComponentElement extends StencilComponents.MyComponent, HTMLStencilElement {}
+  interface HTMLSchematicLanguageButtonElement extends StencilComponents.SchematicLanguageButton, HTMLStencilElement {}
 
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  var HTMLSchematicLanguageButtonElement: {
+    prototype: HTMLSchematicLanguageButtonElement;
+    new (): HTMLSchematicLanguageButtonElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'schematic-language-button': HTMLSchematicLanguageButtonElement;
   }
   interface ElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'schematic-language-button': HTMLSchematicLanguageButtonElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      'my-component': JSXElements.MyComponentAttributes;
+      'schematic-language-button': JSXElements.SchematicLanguageButtonAttributes;
     }
   }
   namespace JSXElements {
-    export interface MyComponentAttributes extends HTMLAttributes {
-      'first'?: string;
-      'last'?: string;
+    export interface SchematicLanguageButtonAttributes extends HTMLAttributes {
+      'code'?: string;
+      'onToggleLanguageMenu'?: (event: CustomEvent) => void;
+      'text'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicLanguageSwitcher {
+
+    }
+  }
+
+  interface HTMLSchematicLanguageSwitcherElement extends StencilComponents.SchematicLanguageSwitcher, HTMLStencilElement {}
+
+  var HTMLSchematicLanguageSwitcherElement: {
+    prototype: HTMLSchematicLanguageSwitcherElement;
+    new (): HTMLSchematicLanguageSwitcherElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-language-switcher': HTMLSchematicLanguageSwitcherElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-language-switcher': HTMLSchematicLanguageSwitcherElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-language-switcher': JSXElements.SchematicLanguageSwitcherAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicLanguageSwitcherAttributes extends HTMLAttributes {
+
     }
   }
 }
@@ -346,6 +381,7 @@ declare global {
     export interface SchematicResourceEditorAttributes extends HTMLAttributes {
       'noContent'?: string;
       'onResourceRefresh'?: (event: CustomEvent) => void;
+      'onResourceUpdated'?: (event: CustomEvent) => void;
       'placeholder'?: string;
       'readCompleted'?: string;
       'readInProgress'?: string;
@@ -383,7 +419,7 @@ declare global {
   }
   namespace JSXElements {
     export interface SchematicResourceExplorerAttributes extends HTMLAttributes {
-
+      'onUrlUpdated'?: (event: CustomEvent) => void;
     }
   }
 }
@@ -393,8 +429,13 @@ declare global {
 
   namespace StencilComponents {
     interface SchematicResourceFilters {
-      'clearFilters': () => void;
-      'openFilters': (url: string) => void;
+      'active': boolean;
+      'filter': string;
+      'filtersOff': string;
+      'filtersOn': string;
+      'getFilters': (url: string) => void;
+      'removeFilters': string;
+      'resetFilters': string;
       'url': string;
     }
   }
@@ -418,6 +459,12 @@ declare global {
   }
   namespace JSXElements {
     export interface SchematicResourceFiltersAttributes extends HTMLAttributes {
+      'active'?: boolean;
+      'filter'?: string;
+      'filtersOff'?: string;
+      'filtersOn'?: string;
+      'removeFilters'?: string;
+      'resetFilters'?: string;
       'url'?: string;
     }
   }
@@ -466,7 +513,7 @@ declare global {
     interface SchematicResourceList {
       'activeResourceId': string;
       'clearResourceList': () => void;
-      'listResources': (url: string, formData?: FormData) => void;
+      'listResources': (url: string) => void;
       'newResource': () => void;
       'noContent': string;
       'url': string;
@@ -496,6 +543,39 @@ declare global {
       'noContent'?: string;
       'onActiveResourceSet'?: (event: CustomEvent) => void;
       'url'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceNavigator {
+
+    }
+  }
+
+  interface HTMLSchematicResourceNavigatorElement extends StencilComponents.SchematicResourceNavigator, HTMLStencilElement {}
+
+  var HTMLSchematicResourceNavigatorElement: {
+    prototype: HTMLSchematicResourceNavigatorElement;
+    new (): HTMLSchematicResourceNavigatorElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-navigator': HTMLSchematicResourceNavigatorElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-navigator': HTMLSchematicResourceNavigatorElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-navigator': JSXElements.SchematicResourceNavigatorAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceNavigatorAttributes extends HTMLAttributes {
+
     }
   }
 }
@@ -647,6 +727,7 @@ declare global {
     interface SchematicResourceSearch {
       'placeholder': string;
       'url': string;
+      'value': string;
     }
   }
 
@@ -671,6 +752,40 @@ declare global {
     export interface SchematicResourceSearchAttributes extends HTMLAttributes {
       'placeholder'?: string;
       'url'?: string;
+      'value'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicRouter {
+
+    }
+  }
+
+  interface HTMLSchematicRouterElement extends StencilComponents.SchematicRouter, HTMLStencilElement {}
+
+  var HTMLSchematicRouterElement: {
+    prototype: HTMLSchematicRouterElement;
+    new (): HTMLSchematicRouterElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-router': HTMLSchematicRouterElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-router': HTMLSchematicRouterElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-router': JSXElements.SchematicRouterAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicRouterAttributes extends HTMLAttributes {
+
     }
   }
 }

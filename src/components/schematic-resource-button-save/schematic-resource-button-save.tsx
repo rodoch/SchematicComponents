@@ -2,7 +2,8 @@ import { Component, Event, EventEmitter, Prop } from '@stencil/core';
 import { ResourceButton } from '../../interfaces/ResourceButton';
 
 @Component({
-    tag: 'schematic-resource-button-save'
+    tag: 'schematic-resource-button-save',
+    styleUrl: 'schematic-resource-button-save.scss'
 })
 
 export class ResourceButtonSave {
@@ -24,7 +25,7 @@ export class ResourceButtonSave {
     render() {
         return (
             <li class="resource-toolbar__item">
-                <button onClick={(event: UIEvent) => this.saveButton(event)}>
+                <button class="resource-button--save" onClick={(event: UIEvent) => this.saveButton(event)}>
                     <slot/>
                 </button>
             </li>

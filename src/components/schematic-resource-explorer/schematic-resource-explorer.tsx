@@ -1,4 +1,4 @@
-import { Component, Element, Listen } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Listen } from '@stencil/core';
 
 @Component({
     tag: 'schematic-resource-explorer'
@@ -6,9 +6,10 @@ import { Component, Element, Listen } from '@stencil/core';
 
 export class ResourceExplorer {
     @Element() explorer: HTMLStencilElement;
+    @Event() urlUpdated: EventEmitter;
 
     componentWillLoad() {
-        (window as any).onpopstate = (event) => {
+        (window as Window).onpopstate = (event) => {
             if (event.state) {
                 this.populate(event.state.resourceId);
             }
@@ -49,6 +50,14 @@ export class ResourceExplorer {
         this.updateHistory(resourceId);
     }
 
+    @Listen('resourceUpdated')
+    onResourceUpdated() {
+        const list = this.explorer.querySelector('schematic-resource-list');
+        if (list) {
+            list.listResources(list.url);
+        }
+    }
+
     populate(resourceId: string) {
         const editor = this.explorer.querySelector('schematic-resource-editor');
         if (editor) {
@@ -71,6 +80,8 @@ export class ResourceExplorer {
         } else {
             history.pushState({resourceId: resourceId}, title, url);
         }
+
+        this.urlUpdated.emit();
     }
 
     updateHistoryNewResource() {
@@ -78,11 +89,12 @@ export class ResourceExplorer {
         let url = location.protocol + '//' + location.host + location.pathname;
         url += "?id=0";
         history.pushState({resourceId: "0"}, title, url);
+        this.urlUpdated.emit();
     }
 
     render() {
-        return (
-            <div>
+        return(
+            <div class="resource-explorer">
                 <slot/>
             </div>
         );

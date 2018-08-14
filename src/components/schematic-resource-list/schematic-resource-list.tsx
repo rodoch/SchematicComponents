@@ -10,8 +10,8 @@ export class ResourceList {
     @State() hasContent: boolean = true;
     @State() html: string;
     @Prop() url: string;
-    @Prop({ mutable: true, reflectToAttr: true }) activeResourceId: string;
     @Prop() noContent: string = 'No result found';
+    @Prop({ mutable: true, reflectToAttr: true }) activeResourceId: string;
     @Event() activeResourceSet: EventEmitter;
 
     @Watch('activeResourceId')
@@ -28,8 +28,28 @@ export class ResourceList {
     }
 
     @Method()
-    listResources(url: string, formData: FormData = new FormData()) {
+    listResources(url: string) {
         this.setLoadingState(true);
+
+        const explorer: HTMLSchematicResourceExplorerElement = this.list.closest('schematic-resource-explorer');
+        if (!explorer) {
+            console.error('Explorer element required');
+            return;
+        }
+
+        const filters: HTMLSchematicResourceFiltersElement = explorer.querySelector('schematic-resource-filters');
+        const filterForm: HTMLFormElement = filters.querySelector('.resource-filter__form');
+        let formData: FormData = (filters && filters.active && filterForm) 
+            ? new FormData(filterForm) 
+            : new FormData();
+
+        const searchForm: HTMLFormElement = explorer.querySelector('.resource-search__form');
+        if (searchForm) {
+            const searchInput: HTMLInputElement = searchForm.querySelector('.resource-search__search-input');
+            const query: string = searchInput.value;
+            formData.append('SearchQuery', query);
+        }
+
         formData.append('ActiveResourceID', this.activeResourceId);
 
         const config: RequestInit = {
@@ -47,6 +67,7 @@ export class ResourceList {
                     this.hasContent = false;
                 } else {
                     response.text().then(text => {
+                        this.hasContent = true;
                         this.updateResourceList(text);
                     });
                 }
@@ -116,7 +137,7 @@ export class ResourceList {
             );
         } else {
             return (
-                <p class="resource-explorer__no-result">{this.noContent}</p>
+                <p class="resource-navigator__no-result">{this.noContent}</p>
             );
         }
     }

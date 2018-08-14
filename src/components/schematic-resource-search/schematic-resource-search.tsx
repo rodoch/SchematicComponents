@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@stencil/core';
+import { Component, Prop } from '@stencil/core';
 
 @Component({
     tag: 'schematic-resource-search',
@@ -6,9 +6,9 @@ import { Component, Prop, State } from '@stencil/core';
 })
 
 export class ResourceSearch {
+    @Prop({ mutable: true, reflectToAttr: true }) value: string;
     @Prop() url: string;
     @Prop() placeholder: string;
-    @State() value: string;
     
     updateValue(event) {
         this.value = event.target.value;
@@ -16,20 +16,17 @@ export class ResourceSearch {
 
     search(event) {
         event.preventDefault();
-
-        let formData: FormData = new FormData();
-        formData.append('query', this.value);
-
         const list = document.querySelector('schematic-resource-list');
-        list.listResources(this.url, formData);
+        const searchUrl = (this.url) ? this.url : list.url;
+        list.listResources(searchUrl);
     }
 
     render() {
         return (
             <div class="resource-search">
-                <form onSubmit={(event) => this.search(event)}>
-                    <input type="text" placeholder={this.placeholder} value={this.value} 
-                        onInput={(event) => this.updateValue(event)} />
+                <form class="resource-search__form" onSubmit={(event) => this.search(event)}>
+                    <input class="resource-search__search-input" type="text" placeholder={this.placeholder} 
+                        value={this.value} onInput={(event) => this.updateValue(event)} />
                 </form>
             </div>
         );

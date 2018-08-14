@@ -16,7 +16,6 @@ export class ResourceRepeater {
 
     @Method()
     sequenceRepeatables() {
-        console.log('hi');
         let repeatables = this.repeater.querySelectorAll('schematic-resource-repeatable');
 
         for (let i: number = 0; i < repeatables.length; ++i) {

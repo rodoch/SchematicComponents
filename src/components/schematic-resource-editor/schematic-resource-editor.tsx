@@ -7,22 +7,30 @@ import { Component, Element, State, Prop, Method, Listen, Watch, Event, EventEmi
 export class ResourceEditor {
     @Element() editor: HTMLStencilElement;
     @State() editorMode: string;
+    @State() editorClass: string;
     @State() loading: boolean;
     @State() html: string;
     @Prop() url: string;
+    @Prop({ mutable: true, reflectToAttr: true }) resourceId: string;
     @Prop() placeholder: string;
     @Prop() noContent: string = 'This entry was not found';
     @Prop() readInProgress: string = 'Loading…';
     @Prop() readCompleted: string = 'Ready';
-    @Prop({ mutable: true, reflectToAttr: true }) resourceId: string;
     @Event() resourceRefresh: EventEmitter;
+    @Event() resourceUpdated: EventEmitter;
 
     @Watch('resourceId')
     resourceIdChanged() {
         this.setEditor();
     }
 
+    @Watch('editorMode')
+    editorModeChanged() {
+        this.editorClass = 'resource-editor resource-editor--' + this.editorMode;
+    }
+
     componentWillLoad() {
+        this.editorClass = 'resource-editor resource-editor--default';
         this.setEditor();
     }
     
@@ -101,7 +109,7 @@ export class ResourceEditor {
             body: formData,
             credentials: 'same-origin'
         }
-        this.fetchResource(saveUrl, config, messageOnComplete);
+        this.fetchResource(saveUrl, config, messageOnComplete, true);
     }
 
     @Method()
@@ -126,7 +134,11 @@ export class ResourceEditor {
         }
     }
 
-    fetchResource(url: string, config: RequestInit, messageOnComplete: string) {
+    fetchResource(
+            url: string, 
+            config: RequestInit, 
+            messageOnComplete: string, 
+            resourceUpdated: boolean = false) {
         this.setLoadingState(true);
 
         fetch(url, config)
@@ -135,14 +147,12 @@ export class ResourceEditor {
             if (response.ok) {
                 switch (response.status)
                 {
-                    case 201:
-                        // Successful resource creation - redirect to new resource editor
+                    case 201: // Successful resource creation - redirect to new resource editor
                         response.text().then(text => {
                             this.resourceRefresh.emit(text);
                         });
                         break;
-                    case 204:
-                        // No content
+                    case 204: // No content
                         this.resourceRefresh.emit();
                         this.updateEditorStatus(messageOnComplete);
                         break;
@@ -150,6 +160,9 @@ export class ResourceEditor {
                         response.text().then(text => {
                             this.updateEditor(text);
                             this.updateEditorStatus(messageOnComplete);
+                            if (resourceUpdated === true) {
+                                this.resourceUpdated.emit();
+                            }
                         });
                         break;
                 }
@@ -219,23 +232,33 @@ export class ResourceEditor {
     render() {
         if (this.loading) {
             return (
-                <div>
-                    <slot/>
-                    <schematic-loading></schematic-loading>
+                <div class={this.editorClass}>
+                    <div class="resource-editor__body">
+                        <slot/>
+                        <schematic-loading></schematic-loading>
+                    </div>
                 </div>
             );
         } else if (this.editorHasResource() || this.editorMode === "create") {
             return (
-                <div>
-                    <slot/>
-                    <div innerHTML={this.html}></div>
+                <div class={this.editorClass}>
+                    <slot name="toolbar"></slot>
+                    <div class="resource-editor__body">
+                        <div class="resource-editor__content">
+                            <div innerHTML={this.html}></div>
+                        </div>
+                    </div>
                 </div>
             );
         } else {
             return (
-                <div>
-                    <slot/>
-                    <div>{this.placeholder}</div>
+                <div class={this.editorClass}>
+                    <slot name="toolbar"></slot>
+                    <div class="resource-editor__body">
+                        <div class="resource-editor__content">
+                            <div>{this.placeholder}</div>
+                        </div>
+                    </div>
                 </div>
             );
         }
