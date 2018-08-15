@@ -428,13 +428,53 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface SchematicResourceFilterControls {
+      'active': boolean;
+      'filtersOff': string;
+      'filtersOn': string;
+      'removeFilters': string;
+    }
+  }
+
+  interface HTMLSchematicResourceFilterControlsElement extends StencilComponents.SchematicResourceFilterControls, HTMLStencilElement {}
+
+  var HTMLSchematicResourceFilterControlsElement: {
+    prototype: HTMLSchematicResourceFilterControlsElement;
+    new (): HTMLSchematicResourceFilterControlsElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-filter-controls': HTMLSchematicResourceFilterControlsElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-filter-controls': HTMLSchematicResourceFilterControlsElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-filter-controls': JSXElements.SchematicResourceFilterControlsAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceFilterControlsAttributes extends HTMLAttributes {
+      'active'?: boolean;
+      'filtersOff'?: string;
+      'filtersOn'?: string;
+      'onFilterMenuToggle'?: (event: CustomEvent) => void;
+      'onFilterStatusUpdate'?: (event: CustomEvent) => void;
+      'removeFilters'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface SchematicResourceFilters {
       'active': boolean;
       'filter': string;
-      'filtersOff': string;
-      'filtersOn': string;
       'getFilters': (url: string) => void;
-      'removeFilters': string;
+      'listResources': () => void;
+      'menuOpen': boolean;
       'resetFilters': string;
       'url': string;
     }
@@ -461,9 +501,9 @@ declare global {
     export interface SchematicResourceFiltersAttributes extends HTMLAttributes {
       'active'?: boolean;
       'filter'?: string;
-      'filtersOff'?: string;
-      'filtersOn'?: string;
-      'removeFilters'?: string;
+      'menuOpen'?: boolean;
+      'onFilterMenuToggle'?: (event: CustomEvent) => void;
+      'onFilterStatusUpdate'?: (event: CustomEvent) => void;
       'resetFilters'?: string;
       'url'?: string;
     }
@@ -658,6 +698,7 @@ declare global {
 
   namespace StencilComponents {
     interface SchematicResourceRepeaterButton {
+      'text': string;
       'url': string;
     }
   }
@@ -681,6 +722,7 @@ declare global {
   }
   namespace JSXElements {
     export interface SchematicResourceRepeaterButtonAttributes extends HTMLAttributes {
+      'text'?: string;
       'url'?: string;
     }
   }

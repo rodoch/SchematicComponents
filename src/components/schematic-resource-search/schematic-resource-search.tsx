@@ -23,7 +23,7 @@ export class ResourceSearch {
 
     render() {
         return (
-            <div class="resource-search">
+            <div class="resource-search resource-navigator__content">
                 <form class="resource-search__form" onSubmit={(event) => this.search(event)}>
                     <input class="resource-search__search-input" type="text" placeholder={this.placeholder} 
                         value={this.value} onInput={(event) => this.updateValue(event)} />

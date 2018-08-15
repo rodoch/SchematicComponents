@@ -26,4 +26,12 @@ export class ResourceRepeater {
             }
         }
     }
+
+    render() {
+        return(
+            <div class="resource-repeater">
+                <slot/>
+            </div>
+        );
+    }
 }

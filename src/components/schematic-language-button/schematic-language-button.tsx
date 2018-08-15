@@ -13,7 +13,7 @@ export class LanguageButton {
     @Event() toggleLanguageMenu: EventEmitter;
 
     componentWillLoad() {
-        this.current = (this.button.slot === 'current') ? true : false;
+        this.current = (this.button.getAttribute('slot') === 'current') ? true : false;
         this.setHref();
     }
 
@@ -42,7 +42,8 @@ export class LanguageButton {
     render() {
         if (this.current) {
             return(
-                <button onClick={(event) => this.buttonPress(event)}>{this.text}</button>
+                <button class="portal-header__button portal-header__button--language" 
+                    onClick={(event) => this.buttonPress(event)}>{this.text}</button>
             );
         } else {
             return(

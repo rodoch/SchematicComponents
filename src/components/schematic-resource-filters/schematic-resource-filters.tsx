@@ -1,4 +1,4 @@
-import { Component, Element, State, Prop, Method, Watch } from '@stencil/core';
+import { Component, Element, State, Prop, Method, Watch, Event, EventEmitter } from '@stencil/core';
 
 @Component({
     tag: 'schematic-resource-filters'
@@ -8,32 +8,24 @@ export class ResourceFilters {
     @Element() filters: HTMLStencilElement;
     @State() loading: boolean;
     @State() html: string;
-    @State() filtersStatus: string;
-    @State() menuOpen: boolean;
     @State() bodyClass: string;
     @Prop() url: string;
     @Prop() filter: string;
-    @Prop() filtersOn: string;
-    @Prop() filtersOff: string;
-    @Prop() removeFilters: string = 'Remove';
     @Prop() resetFilters: string = 'Reset';
     @Prop({ mutable: true, reflectToAttr: true }) active: boolean;
+    @Prop({ mutable: true, reflectToAttr: true }) menuOpen: boolean;
+    @Event() filterMenuToggle: EventEmitter;
+    @Event() filterStatusUpdate: EventEmitter;
 
     @Watch('menuOpen')
     menuStatusChanged() {
         this.bodyClass = (this.menuOpen) 
-            ? 'resource-filter__body resource-filter__body--visible' 
-            : 'resource-filter__body';
-    }
-
-    @Watch('active')
-    filterStatusChanged() {
-        this.filtersStatus = (this.active) ? this.filtersOn : this.filtersOff;
+            ? 'resource-filters resource-filters--visible' 
+            : 'resource-filters';
     }
 
     componentWillLoad() {
-        this.filtersStatus = this.filtersOff;
-        this.bodyClass = 'resource-filter__body';
+        this.bodyClass = 'resource-filters';
         this.getFilters(this.url);
     }
 
@@ -60,26 +52,23 @@ export class ResourceFilters {
         });
     }
 
-    openFiltersButton(event: UIEvent) {
-        event.preventDefault();
-        this.menuOpen = (!this.menuOpen) ? true : false;
+    @Method()
+    listResources() {
+        const list = this.filters.closest('schematic-resource-explorer')
+            .querySelector('schematic-resource-list');
+        if (list) {
+            list.listResources(list.url);
+        }
     }
 
     closeFiltersButton(event: UIEvent) {
         event.preventDefault();
-        this.menuOpen = false;
-    }
-
-    removeFiltersButton(event: UIEvent) {
-        event.preventDefault();
-        this.active = false;
-        this.listResources();
+        this.filterMenuToggle.emit();
     }
 
     setFiltersButton(event: UIEvent) {
         event.preventDefault();
-        this.active = true;
-        this.listResources();
+        this.filterStatusUpdate.emit(true);
     }
 
     resetFiltersButton(event: UIEvent) {
@@ -97,33 +86,26 @@ export class ResourceFilters {
         this.loading = state;
     }
 
-    listResources() {
-        const list = this.filters.closest('schematic-resource-navigator')
-            .querySelector('schematic-resource-list');
-        if (list) {
-            list.listResources(list.url);
-        }
-    }
-
     render() {
         return (
-            <div class="resource-filter">
-                <div class="resource-filter__controls">
-                    <button onClick={(event) => this.openFiltersButton(event)}>{this.filtersStatus}</button>
-                    <button onClick={(event) => this.removeFiltersButton(event)}>{this.removeFilters}</button>
+            <div class={this.bodyClass}>
+                <div class="resource-filters__tools">
+                    <button class="resource-button resource-button--primary resource-filters__set-button" 
+                        onClick={(event) => this.setFiltersButton(event)}>
+                        {this.filter}
+                    </button>
+                    <button class="resource-button resource-filters__reset-button" 
+                        onClick={(event) => this.resetFiltersButton(event)}>
+                        {this.resetFilters}
+                    </button>
+                    <button class="resource-button resource-filters__close-button" 
+                        onClick={(event) => this.closeFiltersButton(event)}>X</button>
                 </div>
-                <div class={this.bodyClass}>
-                    <div class="resource-filter__tools">
-                        <button onClick={(event) => this.setFiltersButton(event)}>{this.filter}</button>
-                        <button onClick={(event) => this.resetFiltersButton(event)}>{this.resetFilters}</button>
-                        <button onClick={(event) => this.closeFiltersButton(event)}>X</button>
-                    </div>
-                    <div class="resource-filter__content">
-                        {this.loading
-                            ? <schematic-loading></schematic-loading>
-                            : <div innerHTML={this.html}></div>
-                        }
-                    </div>
+                <div class="resource-filters__content">
+                    {this.loading
+                        ? <schematic-loading></schematic-loading>
+                        : <div innerHTML={this.html}></div>
+                    }
                 </div>
             </div>
         );

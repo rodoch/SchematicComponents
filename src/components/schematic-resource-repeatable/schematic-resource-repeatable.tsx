@@ -77,7 +77,7 @@ export class ResourceRepeatable {
 
     render() {
         return (
-            <div>
+            <div class="resource-repeatable">
                 <slot/>
                 {this.deleteButton && !this.isRequired
                     ?   <schematic-resource-repeater-delete>{this.deleteButton}</schematic-resource-repeater-delete>

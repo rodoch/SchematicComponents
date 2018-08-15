@@ -1,4 +1,4 @@
-import { Component, Element, Event, EventEmitter, Listen } from '@stencil/core';
+import { Component, Element, State, Event, EventEmitter, Listen } from '@stencil/core';
 
 @Component({
     tag: 'schematic-resource-explorer'
@@ -6,9 +6,14 @@ import { Component, Element, Event, EventEmitter, Listen } from '@stencil/core';
 
 export class ResourceExplorer {
     @Element() explorer: HTMLStencilElement;
+    @State() filterIsActive: boolean;
+    @State() filterMenuOpen: boolean;
     @Event() urlUpdated: EventEmitter;
 
     componentWillLoad() {
+        this.filterIsActive = false;
+        this.filterMenuOpen = false;
+
         (window as Window).onpopstate = (event) => {
             if (event.state) {
                 this.populate(event.state.resourceId);
@@ -58,6 +63,18 @@ export class ResourceExplorer {
         }
     }
 
+    @Listen('filterMenuToggle')
+    onFilterMenuToggle() {
+        this.filterMenuOpen = (!this.filterMenuOpen) ? true : false;
+        this.toggleFilterMenu();
+    }
+
+    @Listen('filterStatusUpdate')
+    onFilterStatusUpdate(event: CustomEvent) {
+        this.filterIsActive = event.detail;
+        this.toggleFilterStatus();
+    }
+
     populate(resourceId: string) {
         const editor = this.explorer.querySelector('schematic-resource-editor');
         if (editor) {
@@ -90,6 +107,27 @@ export class ResourceExplorer {
         url += "?id=0";
         history.pushState({resourceId: "0"}, title, url);
         this.urlUpdated.emit();
+    }
+
+    toggleFilterMenu() {
+        const filters: HTMLSchematicResourceFiltersElement = this.explorer.querySelector('schematic-resource-filters');
+        if (filters) {
+            filters.menuOpen = this.filterMenuOpen;
+        }
+    }
+
+    toggleFilterStatus() {
+        const controls: HTMLSchematicResourceFilterControlsElement = this.explorer.querySelector('schematic-resource-filter-controls');
+        const filters: HTMLSchematicResourceFiltersElement = this.explorer.querySelector('schematic-resource-filters');
+
+        if (controls) {
+            controls.active = this.filterIsActive;
+        }
+
+        if (filters) {
+            filters.active = this.filterIsActive;
+            filters.listResources();
+        }
     }
 
     render() {

@@ -25,7 +25,7 @@ export class ResourceButtonDelete {
     render() {
         return (
             <li class="resource-toolbar__item">
-                <button class="resource-button--delete" onClick={(event: UIEvent) => this.deleteButton(event)}>
+                <button class="resource-button resource-button resource-button--delete" onClick={(event: UIEvent) => this.deleteButton(event)}>
                     <slot/>
                 </button>
             </li>

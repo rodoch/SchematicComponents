@@ -129,7 +129,9 @@ export class ResourceList {
         if (this.loading)
         {
             return (
-                <schematic-loading></schematic-loading>
+                <div class="resource-list__loading">
+                    <schematic-loading></schematic-loading>
+                </div>
             );
         } else if (this.hasContent) {
             return (
@@ -137,7 +139,7 @@ export class ResourceList {
             );
         } else {
             return (
-                <p class="resource-navigator__no-result">{this.noContent}</p>
+                <div class="resource-navigator__no-result">{this.noContent}</div>
             );
         }
     }

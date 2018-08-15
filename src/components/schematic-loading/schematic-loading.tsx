@@ -29,12 +29,17 @@ export class Loading {
     render() {
         if (popmotion) {
             return (
-                <div class="loading-body">
-                    <div class="balls">
-                        <div class="ball"></div>
-                        <div class="ball"></div>
-                        <div class="ball"></div>
-                        <div class="ball"></div>
+                <div class="loading">
+                    <div class="loading-content--hidden">
+                        <slot/>
+                    </div>
+                    <div class="loading-body">
+                        <div class="balls">
+                            <div class="ball"></div>
+                            <div class="ball"></div>
+                            <div class="ball"></div>
+                            <div class="ball"></div>
+                        </div>
                     </div>
                 </div>
             );

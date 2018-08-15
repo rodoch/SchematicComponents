@@ -10,9 +10,9 @@ export class ResourceEditorStatus {
 
     render() {
         return (
-            <li class="resource-toolbar__item resource-editor-status">
+            <div class="resource-editor-status">
                 {this.status}
-            </li>
+            </div>
         );
     }
 }

@@ -1,7 +1,8 @@
 import { Component, Element, State, Prop, Method, Listen, Watch, Event, EventEmitter } from '@stencil/core';
 
 @Component({
-    tag: 'schematic-resource-editor'
+    tag: 'schematic-resource-editor',
+    styleUrl: 'schematic-resource-editor.scss'
 })
 
 export class ResourceEditor {
@@ -233,8 +234,8 @@ export class ResourceEditor {
         if (this.loading) {
             return (
                 <div class={this.editorClass}>
+                    <slot name="toolbar"></slot>
                     <div class="resource-editor__body">
-                        <slot/>
                         <schematic-loading></schematic-loading>
                     </div>
                 </div>

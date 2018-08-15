@@ -15,9 +15,11 @@ export class ResourceRepeaterDeleteButton {
 
     render() {
         return (
-            <button onClick={(event: UIEvent) => this.buttonPress(event)}>
-                <slot/>
-            </button>
+            <div class="resource-repeater__delete">
+                <button class="resource-repeater__delete-button" onClick={(event: UIEvent) => this.buttonPress(event)}>
+                    <slot/>
+                </button>
+            </div>
         );
     }
 }

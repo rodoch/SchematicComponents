@@ -10,6 +10,7 @@ export class ResourceRepeaterButton {
     @State() hasResource: boolean = false;
     @State() html: string;
     @Prop() url: string;
+    @Prop() text: string;
 
     buttonPress(event: UIEvent) {
         event.preventDefault();
@@ -59,24 +60,25 @@ export class ResourceRepeaterButton {
     render() {
         if (this.loading) {
             return (
-                <schematic-loading></schematic-loading>
+                <div class="resource-repeater__loading">
+                    <schematic-loading>
+                        <slot/>
+                    </schematic-loading>
+                </div>
             );
         } else if (this.hasResource) {
             return (
                 <div>
                     <div innerHTML={this.html}></div>
                     <div>
-                        <schematic-resource-repeater-button url={this.url}>
-                            <slot/>
+                        <schematic-resource-repeater-button url={this.url} text={this.text}>
                         </schematic-resource-repeater-button>
                     </div>
                 </div>
             );
         } else {
             return (
-                <button onClick={(event: UIEvent) => this.buttonPress(event)}>
-                    <span><slot/></span>
-                </button>
+                <button class="resource-repeater__button" onClick={(event: UIEvent) => this.buttonPress(event)}>{this.text}</button>
             );
         }
     }

@@ -10,6 +10,7 @@ export class ResourceEditorToolbar {
     render() {
         return (
             <div class="resource-toolbar">
+                <slot name="status"></slot>
                 <ul class="resource-toolbar__list">
                     <slot/>
                 </ul>
