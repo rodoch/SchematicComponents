@@ -6,11 +6,13 @@ import { Component, Element, State, Event, EventEmitter, Listen } from '@stencil
 
 export class ResourceExplorer {
     @Element() explorer: HTMLStencilElement;
+    @State() initialPageTitle: string;
     @State() filterIsActive: boolean;
     @State() filterMenuOpen: boolean;
     @Event() urlUpdated: EventEmitter;
 
     componentWillLoad() {
+        this.initialPageTitle = document.title;
         this.filterIsActive = false;
         this.filterMenuOpen = false;
 
@@ -39,12 +41,7 @@ export class ResourceExplorer {
 
     @Listen('resourceRefresh')
     onResourceRefresh(event: CustomEvent) {
-        let resourceId: string = "0";
-
-        if (event.detail) {
-            resourceId = event.detail;
-        }
-
+        const resourceId: string = (event.detail) ? event.detail : "0";
         this.populate(resourceId);
 
         const list = this.explorer.querySelector('schematic-resource-list');
@@ -75,6 +72,22 @@ export class ResourceExplorer {
         this.toggleFilterStatus();
     }
 
+    @Listen('newResourceTitle')
+    onNewResourceTitle(event: CustomEvent) {
+        const resourceTitle: string = event.detail;
+        const url: string = location.href;
+        let newTitle: string = resourceTitle;
+
+        const splitByPipe: string[] = this.initialPageTitle.split(' | ');
+        if (splitByPipe.length > 0) {
+            newTitle += ' | ';
+            newTitle += splitByPipe.slice(1);
+        }
+
+        document.title = newTitle;
+        history.replaceState(history.state, newTitle, url);
+    }
+
     populate(resourceId: string) {
         const editor = this.explorer.querySelector('schematic-resource-editor');
         if (editor) {
@@ -88,7 +101,7 @@ export class ResourceExplorer {
     }
 
     updateHistory(resourceId: string) {
-        const title = document.querySelector('title').textContent;
+        const title = document.title;
         let url = location.protocol + '//' + location.host + location.pathname;
         url += "?id=" + resourceId;
 
@@ -102,7 +115,7 @@ export class ResourceExplorer {
     }
 
     updateHistoryNewResource() {
-        const title = document.querySelector('title').textContent;
+        const title = this.initialPageTitle;
         let url = location.protocol + '//' + location.host + location.pathname;
         url += "?id=0";
         history.pushState({resourceId: "0"}, title, url);

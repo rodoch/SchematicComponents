@@ -24,12 +24,10 @@ export class ResourceButtonSave {
 
     render() {
         return (
-            <li class="resource-toolbar__item">
-                <button class="resource-button resource-button--primary resource-button--save" 
-                    onClick={(event: UIEvent) => this.saveButton(event)}>
-                    <slot/>
-                </button>
-            </li>
+            <button class="resource-button resource-button--primary resource-button--save" 
+                onClick={(event: UIEvent) => this.saveButton(event)}>
+                <slot/>
+            </button>
         );
     }
 }

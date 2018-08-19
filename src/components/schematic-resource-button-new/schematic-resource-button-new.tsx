@@ -24,11 +24,9 @@ export class ResourceButtonNew {
 
     render() {
         return (
-            <li class="resource-toolbar__item">
-                <button class="resource-button resource-button--new" onClick={(event: UIEvent) => this.newButton(event)}>
-                    <slot/>
-                </button>
-            </li>
+            <button class="resource-button resource-button--new" onClick={(event: UIEvent) => this.newButton(event)}>
+                <slot/>
+            </button>
         );
     }
 }

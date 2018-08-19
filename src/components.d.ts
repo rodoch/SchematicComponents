@@ -170,6 +170,7 @@ declare global {
   namespace StencilComponents {
     interface SchematicResourceButtonDelete {
       'completed': string;
+      'confirm': string;
       'inProgress': string;
     }
   }
@@ -194,6 +195,7 @@ declare global {
   namespace JSXElements {
     export interface SchematicResourceButtonDeleteAttributes extends HTMLAttributes {
       'completed'?: string;
+      'confirm'?: string;
       'inProgress'?: string;
       'onDeleteCurrentResouce'?: (event: CustomEvent) => void;
     }
@@ -795,6 +797,39 @@ declare global {
       'placeholder'?: string;
       'url'?: string;
       'value'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface SchematicResourceTitle {
+
+    }
+  }
+
+  interface HTMLSchematicResourceTitleElement extends StencilComponents.SchematicResourceTitle, HTMLStencilElement {}
+
+  var HTMLSchematicResourceTitleElement: {
+    prototype: HTMLSchematicResourceTitleElement;
+    new (): HTMLSchematicResourceTitleElement;
+  };
+  interface HTMLElementTagNameMap {
+    'schematic-resource-title': HTMLSchematicResourceTitleElement;
+  }
+  interface ElementTagNameMap {
+    'schematic-resource-title': HTMLSchematicResourceTitleElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'schematic-resource-title': JSXElements.SchematicResourceTitleAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface SchematicResourceTitleAttributes extends HTMLAttributes {
+      'onNewResourceTitle'?: (event: CustomEvent) => void;
     }
   }
 }

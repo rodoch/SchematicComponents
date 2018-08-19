@@ -11,9 +11,9 @@ export class ResourceEditorToolbar {
         return (
             <div class="resource-toolbar">
                 <slot name="status"></slot>
-                <ul class="resource-toolbar__list">
+                <div class="resource-toolbar__buttons">
                     <slot/>
-                </ul>
+                </div>
             </div>
         );
     }

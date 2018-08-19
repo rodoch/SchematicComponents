@@ -9,6 +9,7 @@ import { ResourceButton } from '../../interfaces/ResourceButton';
 export class ResourceButtonDelete {
     @Event() deleteCurrentResouce: EventEmitter;
     @Prop() inProgress: string;
+    @Prop() confirm: string;
     @Prop() completed: string;
 
     deleteButton(event: UIEvent) {
@@ -19,16 +20,18 @@ export class ResourceButtonDelete {
             completed: this.completed
         };
 
-        this.deleteCurrentResouce.emit(deleteAction);
+        const confirm: boolean = window.confirm(this.confirm);
+
+        if (this.confirm && confirm) {
+            this.deleteCurrentResouce.emit(deleteAction);
+        }
     }
 
     render() {
         return (
-            <li class="resource-toolbar__item">
-                <button class="resource-button resource-button resource-button--delete" onClick={(event: UIEvent) => this.deleteButton(event)}>
-                    <slot/>
-                </button>
-            </li>
+            <button class="resource-button resource-button resource-button--delete" onClick={(event: UIEvent) => this.deleteButton(event)}>
+                <slot/>
+            </button>
         );
     }
 }

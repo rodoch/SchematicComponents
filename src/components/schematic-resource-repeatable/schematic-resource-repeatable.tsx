@@ -7,9 +7,9 @@ import { Component, Element, Prop, Watch, Listen, Event, EventEmitter } from '@s
 export class ResourceRepeatable {
     @Element() repeatable: HTMLStencilElement;
     @Prop() model: string;
+    @Prop() deleteButton: string;
     @Prop({ mutable: true, reflectToAttr: true }) index: string;
     @Prop({ mutable: true, reflectToAttr: true }) isRequired: boolean = false;
-    @Prop() deleteButton: string;
     @Event() resourceRepeated: EventEmitter;
 
     @Watch('index')
@@ -79,10 +79,12 @@ export class ResourceRepeatable {
         return (
             <div class="resource-repeatable">
                 <slot/>
-                {this.deleteButton && !this.isRequired
-                    ?   <schematic-resource-repeater-delete>{this.deleteButton}</schematic-resource-repeater-delete>
-                    :   ''
-                }
+                <div class="resource-repeatable__tools">
+                    {this.deleteButton && !this.isRequired
+                        ?   <schematic-resource-repeater-delete>{this.deleteButton}</schematic-resource-repeater-delete>
+                        :   ''
+                    }
+                </div>
             </div>
         );
     }
