@@ -6,8 +6,10 @@ import { Component, Element, State, Prop, Event, EventEmitter, Method } from '@s
 
 export class LanguageButton {
     @Element() button: HTMLStencilElement;
+    @State() open: boolean;
     @State() current: boolean;
     @State() href: string;
+    @State() handleOffClick: any;
     @Prop() code: string;
     @Prop() text: string;
     @Event() toggleLanguageMenu: EventEmitter;
@@ -15,6 +17,7 @@ export class LanguageButton {
     componentWillLoad() {
         this.current = (this.button.getAttribute('slot') === 'current') ? true : false;
         this.setHref();
+        this.handleOffClick = this.offClickHandler.bind(this);
     }
 
     @Method()
@@ -36,7 +39,28 @@ export class LanguageButton {
 
     buttonPress(event: UIEvent) {
         event.preventDefault();
+        this.open = (!this.open) ? true : false;
         this.toggleLanguageMenu.emit();
+
+        if (this.current) {
+            this.toggleOffClickHander(this.open);
+        }
+    }
+    
+    offClickHandler(event) {
+        if (!this.button.contains(event.target)) {
+            this.open = (!this.open) ? true : false;
+            this.toggleLanguageMenu.emit();
+            this.toggleOffClickHander(false);
+        }
+    }
+
+    toggleOffClickHander(state: boolean) {
+        if (state) {
+            document.addEventListener('click', this.handleOffClick);
+        } else {
+            document.removeEventListener('click', this.handleOffClick);
+        }
     }
 
     render() {

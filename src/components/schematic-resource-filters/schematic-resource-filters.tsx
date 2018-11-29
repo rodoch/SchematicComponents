@@ -33,7 +33,7 @@ export class ResourceFilters {
     getFilters(url: string) {
         fetch(url, {
             method: 'get',
-            credentials: "same-origin"
+            credentials: 'same-origin'
         }).then(response => {
             this.setLoadingState(false);
             if (response.ok) {

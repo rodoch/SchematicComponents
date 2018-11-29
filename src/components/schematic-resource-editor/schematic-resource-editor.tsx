@@ -4,7 +4,6 @@ import { Component, Element, State, Prop, Method, Listen, Watch, Event, EventEmi
     tag: 'schematic-resource-editor',
     styleUrl: 'schematic-resource-editor.scss'
 })
-
 export class ResourceEditor {
     @Element() editor: HTMLStencilElement;
     @State() editorMode: string;
@@ -254,7 +253,7 @@ export class ResourceEditor {
         } else {
             return (
                 <div class={this.editorClass}>
-                    <slot name="toolbar"></slot>
+                    <slot name="toolbar"></slot> 
                     <div class="resource-editor__body">
                         <div class="resource-editor__content">
                             <div>{this.placeholder}</div>

@@ -3,7 +3,6 @@ import { Component, State, Element, Prop, Event, EventEmitter, Method, Watch } f
 @Component({
     tag: 'schematic-resource-list'
 })
-
 export class ResourceList {
     @Element() list: HTMLStencilElement;
     @State() loading: boolean;
@@ -19,7 +18,7 @@ export class ResourceList {
         this.setActiveResource();
     }
 
-    componentWillLoad() {
+    componentDidLoad() {
         this.listResources(this.url);
 
         if (this.activeResourceId) {
@@ -126,8 +125,7 @@ export class ResourceList {
     }
     
     render() {
-        if (this.loading)
-        {
+        if (this.loading) {
             return (
                 <div class="resource-list__loading">
                     <schematic-loading></schematic-loading>
