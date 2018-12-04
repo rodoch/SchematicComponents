@@ -13,18 +13,44 @@ import '@stencil/core';
 export namespace Components {
 
   interface SchematicImageUploader {
-    'src': string;
+    'accept': string;
+    'alt': string;
+    'culture': string;
+    'delete': string;
+    'fileName': string;
+    'formDataName': string;
+    'headers': string;
+    'input': string;
+    'maxFiles': number;
+    'method': string;
+    'nodrop': boolean;
+    'path': string;
+    'target': string;
   }
   interface SchematicImageUploaderAttributes extends StencilHTMLAttributes {
-    'src'?: string;
+    'accept'?: string;
+    'alt'?: string;
+    'culture'?: string;
+    'delete'?: string;
+    'fileName'?: string;
+    'formDataName'?: string;
+    'headers'?: string;
+    'input'?: string;
+    'maxFiles'?: number;
+    'method'?: string;
+    'nodrop'?: boolean;
+    'path'?: string;
+    'target'?: string;
   }
 
   interface SchematicLanguageButton {
+    'base': string;
     'code': string;
     'setHref': () => void;
     'text': string;
   }
   interface SchematicLanguageButtonAttributes extends StencilHTMLAttributes {
+    'base'?: string;
     'code'?: string;
     'onToggleLanguageMenu'?: (event: CustomEvent) => void;
     'text'?: string;
@@ -35,6 +61,53 @@ export namespace Components {
 
   interface SchematicLoading {}
   interface SchematicLoadingAttributes extends StencilHTMLAttributes {}
+
+  interface SchematicQuillEditor {
+    'bounds': HTMLElement | string;
+    'content': string;
+    'format': 'object' | 'html' | 'text' | 'json';
+    'formats': string[];
+    'input': string;
+    'modules': { [index: string]: Object };
+    'output': 'html' | 'text' | 'json';
+    'placeholder': string;
+    'readOnly': boolean;
+    'scrollingContainer': HTMLElement | string;
+    'strict': boolean;
+    'styles': any;
+    'theme': string;
+  }
+  interface SchematicQuillEditorAttributes extends StencilHTMLAttributes {
+    'bounds'?: HTMLElement | string;
+    'content'?: string;
+    'format'?: 'object' | 'html' | 'text' | 'json';
+    'formats'?: string[];
+    'input'?: string;
+    'modules'?: { [index: string]: Object };
+    'onOnContentChanged'?: (event: CustomEvent<{
+      editor: any,
+      content: any,
+      text: string,
+      html: string,
+      delta: any,
+      oldDelta: any,
+      source: string
+    }>) => void;
+    'onOnInitialised'?: (event: CustomEvent<any>) => void;
+    'onOnSelectionChanged'?: (event: CustomEvent<{
+      editor: any,
+      range: any,
+      oldRange: any,
+      source: string
+    }>) => void;
+    'output'?: 'html' | 'text' | 'json';
+    'placeholder'?: string;
+    'readOnly'?: boolean;
+    'scrollingContainer'?: HTMLElement | string;
+    'strict'?: boolean;
+    'styles'?: any;
+    'theme'?: string;
+  }
 
   interface SchematicResourceButtonCreate {
     'completed': string;
@@ -280,21 +353,21 @@ export namespace Components {
   interface SchematicUploader {
     'accept': string;
     'culture': string;
+    'formDataName': string;
     'headers': string;
     'maxFiles': number;
     'method': string;
-    'name': string;
-    'noDrop': boolean;
+    'nodrop': boolean;
     'target': string;
   }
   interface SchematicUploaderAttributes extends StencilHTMLAttributes {
     'accept'?: string;
     'culture'?: string;
+    'formDataName'?: string;
     'headers'?: string;
     'maxFiles'?: number;
     'method'?: string;
-    'name'?: string;
-    'noDrop'?: boolean;
+    'nodrop'?: boolean;
     'onUploadResult'?: (event: CustomEvent) => void;
     'target'?: string;
   }
@@ -321,6 +394,7 @@ declare global {
     'SchematicLanguageButton': Components.SchematicLanguageButton;
     'SchematicLanguageSwitcher': Components.SchematicLanguageSwitcher;
     'SchematicLoading': Components.SchematicLoading;
+    'SchematicQuillEditor': Components.SchematicQuillEditor;
     'SchematicResourceButtonCreate': Components.SchematicResourceButtonCreate;
     'SchematicResourceButtonDelete': Components.SchematicResourceButtonDelete;
     'SchematicResourceButtonNew': Components.SchematicResourceButtonNew;
@@ -353,6 +427,7 @@ declare global {
     'schematic-language-button': Components.SchematicLanguageButtonAttributes;
     'schematic-language-switcher': Components.SchematicLanguageSwitcherAttributes;
     'schematic-loading': Components.SchematicLoadingAttributes;
+    'schematic-quill-editor': Components.SchematicQuillEditorAttributes;
     'schematic-resource-button-create': Components.SchematicResourceButtonCreateAttributes;
     'schematic-resource-button-delete': Components.SchematicResourceButtonDeleteAttributes;
     'schematic-resource-button-new': Components.SchematicResourceButtonNewAttributes;
@@ -403,6 +478,12 @@ declare global {
   var HTMLSchematicLoadingElement: {
     prototype: HTMLSchematicLoadingElement;
     new (): HTMLSchematicLoadingElement;
+  };
+
+  interface HTMLSchematicQuillEditorElement extends Components.SchematicQuillEditor, HTMLStencilElement {}
+  var HTMLSchematicQuillEditorElement: {
+    prototype: HTMLSchematicQuillEditorElement;
+    new (): HTMLSchematicQuillEditorElement;
   };
 
   interface HTMLSchematicResourceButtonCreateElement extends Components.SchematicResourceButtonCreate, HTMLStencilElement {}
@@ -560,6 +641,7 @@ declare global {
     'schematic-language-button': HTMLSchematicLanguageButtonElement
     'schematic-language-switcher': HTMLSchematicLanguageSwitcherElement
     'schematic-loading': HTMLSchematicLoadingElement
+    'schematic-quill-editor': HTMLSchematicQuillEditorElement
     'schematic-resource-button-create': HTMLSchematicResourceButtonCreateElement
     'schematic-resource-button-delete': HTMLSchematicResourceButtonDeleteElement
     'schematic-resource-button-new': HTMLSchematicResourceButtonNewElement
@@ -592,6 +674,7 @@ declare global {
     'schematic-language-button': HTMLSchematicLanguageButtonElement;
     'schematic-language-switcher': HTMLSchematicLanguageSwitcherElement;
     'schematic-loading': HTMLSchematicLoadingElement;
+    'schematic-quill-editor': HTMLSchematicQuillEditorElement;
     'schematic-resource-button-create': HTMLSchematicResourceButtonCreateElement;
     'schematic-resource-button-delete': HTMLSchematicResourceButtonDeleteElement;
     'schematic-resource-button-new': HTMLSchematicResourceButtonNewElement;

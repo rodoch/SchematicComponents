@@ -10,11 +10,11 @@ export class Uploader {
     @Element() uploader: HTMLStencilElement;
     @Prop() accept: string;
     @Prop() culture: string;
+    @Prop() formDataName: string;
     @Prop() headers: string;
     @Prop() maxFiles: number;
-    @Prop() name: string;
     @Prop() method: string = 'POST';
-    @Prop() noDrop: boolean = false;
+    @Prop() nodrop: boolean = false;
     @Prop() target: string;
     @Event() uploadResult: EventEmitter;
 
@@ -25,7 +25,7 @@ export class Uploader {
             upload.i18n = i18nGA.default;
         }
 
-        upload.addEventListener('upload-response', (event: CustomEvent) => { 
+        upload.addEventListener('upload-response', (event: CustomEvent) => {
             this.uploadResult.emit(event);
         });
     }
@@ -34,12 +34,12 @@ export class Uploader {
         return(
             <vaadin-upload
                 accept={this.accept}
-                form-data-name={this.name}
+                form-data-name={this.formDataName}
                 headers={this.headers}
                 target={this.target} 
                 max-files={this.maxFiles} 
-                method={this.method} 
-                nodrop={this.noDrop}>
+                method={this.method}
+                nodrop={this.nodrop}>
             </vaadin-upload>
         );
     }

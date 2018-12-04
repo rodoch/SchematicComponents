@@ -18,21 +18,24 @@
   "dependencies": {
     "@intl/core": "0.0.1-beta.0",
     "@stencil/state-tunnel": "0.0.7",
+    "@types/quill": "^2.0.1",
     "@uppy/core": "^0.27.3",
     "@uppy/dashboard": "^0.27.5",
     "@uppy/xhr-upload": "^0.27.4",
     "@vaadin/vaadin-upload": "^4.2.1",
     "cryptiles": "^4.1.3",
-    "elix": "^2.2.4",
-    "popmotion": "^8.3.3",
+    "elix": "3.4.0",
+    "popmotion": "^8.5.3",
+    "quill": "^1.3.6",
     "scroll-into-view-if-needed": "^2.2.16",
     "stylefire": "^2.0.6"
   },
   "devDependencies": {
-    "@stencil/core": "0.15.0",
+    "@stencil/core": "^0.16.0",
     "@stencil/sass": "^0.1.1",
     "@types/jest": "^21.1.1",
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "workbox-build": "3.4.1"
   },
   "repository": {
     "type": "git",

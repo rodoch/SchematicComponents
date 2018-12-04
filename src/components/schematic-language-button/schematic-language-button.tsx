@@ -10,6 +10,7 @@ export class LanguageButton {
     @State() current: boolean;
     @State() href: string;
     @State() handleOffClick: any;
+    @Prop() base: string;
     @Prop() code: string;
     @Prop() text: string;
     @Event() toggleLanguageMenu: EventEmitter;
@@ -29,9 +30,12 @@ export class LanguageButton {
         const query: string = window.location.search;
         const path: string = window.location.pathname;
         let pathArray: string[] = path.split('/');
-        pathArray[1] = this.code;
+        if (this.base && this.base.length > 0 && this.base !== "/") {
+            pathArray[2] = this.code;
+        } else {
+            pathArray[1] = this.code;
+        }
         const newPath: string = pathArray.join('/');
-
         let result = newPath;
         result += (query) ? query : '';
         this.href = result;
