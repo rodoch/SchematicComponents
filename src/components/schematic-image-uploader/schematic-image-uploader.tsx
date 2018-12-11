@@ -10,12 +10,16 @@ export class ImageUploader {
     @State() hasImage: boolean = false;
     @State() imgAlt: string;
     @State() imgSrc: string;
+    @State() uploadPath: string;
     @Prop() accept: string;
     @Prop() alt: string;
+    @Prop() base: string;
+    @Prop() container: string;
     @Prop() culture: string;
     @Prop() delete: string;
+    @Prop() deleteInput: string;
     @Prop() fileName: string;
-    @Prop() formDataName: string;
+    @Prop() formDataName: string = 'files';
     @Prop() headers: string;
     @Prop() input: string;
     @Prop() maxFiles: number;
@@ -24,8 +28,12 @@ export class ImageUploader {
     @Prop() path: string;
     @Prop() target: string;
 
+    private deleteInputElement: HTMLInputElement;
+    private targetInputElement: HTMLInputElement;
+
     @Listen('uploadResult')
     onEvent(event: CustomEvent) {
+        console.log(event.detail.detail.xhr.response);
         const xhrResponse: any = JSON.parse(event.detail.detail.xhr.response);
         const newFileId: string = xhrResponse[0].id;
         const newFileName: string = event.detail.detail.file.name;
@@ -33,19 +41,45 @@ export class ImageUploader {
         this.displayImage(newFileName);
     }
 
-    private targetInputElement: HTMLInputElement;
-
     enforceTrailingSlash(path: string) {
         return path.endsWith("/") ? path : path + "/";
     }
 
     getImagePath(path: string, fileName: string) {
-        return this.enforceTrailingSlash(path) + fileName;
+        let imagePath: string = (this.base && this.base.length > 0) ? this.base : '';
+
+        if (imagePath.endsWith('/')) {
+            imagePath = imagePath.slice(0, -1);
+        }
+
+        imagePath += this.enforceTrailingSlash(path) + fileName;
+
+        if (this.container && this.container.length > 0) {
+            imagePath += "?container=" + this.container;
+        }
+
+        return imagePath;
+    }
+
+    getUploadPath() {
+        let path: string = (this.base && this.base.length > 0) ? this.base : '';
+
+        if (path.endsWith('/')) {
+            path = path.slice(0, -1);
+        }
+
+        path += this.target;
+
+        if (this.container && this.container.length > 0) {
+            path += "?container=" + this.container;
+        }
+
+        return path;
     }
 
     deleteImage(event: UIEvent) {
         event.preventDefault();
-        this.targetInputElement.value = null;
+        this.deleteInputElement.value = 'true';
         this.hasImage = false;
     }
 
@@ -58,7 +92,9 @@ export class ImageUploader {
         this.hasImage = (this.fileName && this.fileName.length > 1) ? true : false;
         this.imgAlt = this.alt;
         this.imgSrc = this.getImagePath(this.path, this.fileName);
+        this.uploadPath = this.getUploadPath();
         this.targetInputElement = document.getElementById(this.input) as HTMLInputElement;
+        this.deleteInputElement = document.getElementById(this.deleteInput) as HTMLInputElement;
     }
 
     render() {
@@ -84,7 +120,7 @@ export class ImageUploader {
                 culture={this.culture}
                 form-data-name={this.formDataName}
                 headers={this.headers}
-                target={this.target} 
+                target={this.uploadPath} 
                 max-files={this.maxFiles} 
                 method={this.method}
                 nodrop={this.nodrop}>

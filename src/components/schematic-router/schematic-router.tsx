@@ -3,7 +3,6 @@ import { Component, State, Listen } from '@stencil/core';
 @Component({
     tag: 'schematic-router'
 })
-
 export class Router {
     @State() open: boolean;
     @State() menuClass: string;

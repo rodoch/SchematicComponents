@@ -12,11 +12,23 @@ import '@stencil/core';
 
 export namespace Components {
 
+  interface SchematicFieldset {
+    'selected': boolean;
+    'tabs': string;
+  }
+  interface SchematicFieldsetAttributes extends StencilHTMLAttributes {
+    'selected'?: boolean;
+    'tabs'?: string;
+  }
+
   interface SchematicImageUploader {
     'accept': string;
     'alt': string;
+    'base': string;
+    'container': string;
     'culture': string;
     'delete': string;
+    'deleteInput': string;
     'fileName': string;
     'formDataName': string;
     'headers': string;
@@ -30,8 +42,11 @@ export namespace Components {
   interface SchematicImageUploaderAttributes extends StencilHTMLAttributes {
     'accept'?: string;
     'alt'?: string;
+    'base'?: string;
+    'container'?: string;
     'culture'?: string;
     'delete'?: string;
+    'deleteInput'?: string;
     'fileName'?: string;
     'formDataName'?: string;
     'headers'?: string;
@@ -167,6 +182,7 @@ export namespace Components {
     'clearEditor': () => void;
     'createResource': (messageOnComplete: string) => void;
     'deleteResource': (id: string, messageOnComplete: string) => void;
+    'facets': string;
     'newResource': (messageOnComplete: string) => void;
     'noContent': string;
     'placeholder': string;
@@ -178,6 +194,7 @@ export namespace Components {
     'url': string;
   }
   interface SchematicResourceEditorAttributes extends StencilHTMLAttributes {
+    'facets'?: string;
     'noContent'?: string;
     'onResourceRefresh'?: (event: CustomEvent) => void;
     'onResourceUpdated'?: (event: CustomEvent) => void;
@@ -240,6 +257,7 @@ export namespace Components {
   interface SchematicResourceList {
     'activeResourceId': string;
     'clearResourceList': () => void;
+    'facets': string;
     'listResources': (url: string) => void;
     'newResource': () => void;
     'noContent': string;
@@ -247,6 +265,7 @@ export namespace Components {
   }
   interface SchematicResourceListAttributes extends StencilHTMLAttributes {
     'activeResourceId'?: string;
+    'facets'?: string;
     'noContent'?: string;
     'onActiveResourceSet'?: (event: CustomEvent) => void;
     'url'?: string;
@@ -350,6 +369,13 @@ export namespace Components {
     'url'?: string;
   }
 
+  interface SchematicTabs {
+    'name': string;
+  }
+  interface SchematicTabsAttributes extends StencilHTMLAttributes {
+    'name'?: string;
+  }
+
   interface SchematicUploader {
     'accept': string;
     'culture': string;
@@ -390,6 +416,7 @@ export namespace Components {
 
 declare global {
   interface StencilElementInterfaces {
+    'SchematicFieldset': Components.SchematicFieldset;
     'SchematicImageUploader': Components.SchematicImageUploader;
     'SchematicLanguageButton': Components.SchematicLanguageButton;
     'SchematicLanguageSwitcher': Components.SchematicLanguageSwitcher;
@@ -418,11 +445,13 @@ declare global {
     'SchematicSelectItem': Components.SchematicSelectItem;
     'SchematicSelectSearch': Components.SchematicSelectSearch;
     'SchematicSignIn': Components.SchematicSignIn;
+    'SchematicTabs': Components.SchematicTabs;
     'SchematicUploader': Components.SchematicUploader;
     'SchematicUserInviteLink': Components.SchematicUserInviteLink;
   }
 
   interface StencilIntrinsicElements {
+    'schematic-fieldset': Components.SchematicFieldsetAttributes;
     'schematic-image-uploader': Components.SchematicImageUploaderAttributes;
     'schematic-language-button': Components.SchematicLanguageButtonAttributes;
     'schematic-language-switcher': Components.SchematicLanguageSwitcherAttributes;
@@ -451,10 +480,17 @@ declare global {
     'schematic-select-item': Components.SchematicSelectItemAttributes;
     'schematic-select-search': Components.SchematicSelectSearchAttributes;
     'schematic-sign-in': Components.SchematicSignInAttributes;
+    'schematic-tabs': Components.SchematicTabsAttributes;
     'schematic-uploader': Components.SchematicUploaderAttributes;
     'schematic-user-invite-link': Components.SchematicUserInviteLinkAttributes;
   }
 
+
+  interface HTMLSchematicFieldsetElement extends Components.SchematicFieldset, HTMLStencilElement {}
+  var HTMLSchematicFieldsetElement: {
+    prototype: HTMLSchematicFieldsetElement;
+    new (): HTMLSchematicFieldsetElement;
+  };
 
   interface HTMLSchematicImageUploaderElement extends Components.SchematicImageUploader, HTMLStencilElement {}
   var HTMLSchematicImageUploaderElement: {
@@ -624,6 +660,12 @@ declare global {
     new (): HTMLSchematicSignInElement;
   };
 
+  interface HTMLSchematicTabsElement extends Components.SchematicTabs, HTMLStencilElement {}
+  var HTMLSchematicTabsElement: {
+    prototype: HTMLSchematicTabsElement;
+    new (): HTMLSchematicTabsElement;
+  };
+
   interface HTMLSchematicUploaderElement extends Components.SchematicUploader, HTMLStencilElement {}
   var HTMLSchematicUploaderElement: {
     prototype: HTMLSchematicUploaderElement;
@@ -637,6 +679,7 @@ declare global {
   };
 
   interface HTMLElementTagNameMap {
+    'schematic-fieldset': HTMLSchematicFieldsetElement
     'schematic-image-uploader': HTMLSchematicImageUploaderElement
     'schematic-language-button': HTMLSchematicLanguageButtonElement
     'schematic-language-switcher': HTMLSchematicLanguageSwitcherElement
@@ -665,11 +708,13 @@ declare global {
     'schematic-select-item': HTMLSchematicSelectItemElement
     'schematic-select-search': HTMLSchematicSelectSearchElement
     'schematic-sign-in': HTMLSchematicSignInElement
+    'schematic-tabs': HTMLSchematicTabsElement
     'schematic-uploader': HTMLSchematicUploaderElement
     'schematic-user-invite-link': HTMLSchematicUserInviteLinkElement
   }
 
   interface ElementTagNameMap {
+    'schematic-fieldset': HTMLSchematicFieldsetElement;
     'schematic-image-uploader': HTMLSchematicImageUploaderElement;
     'schematic-language-button': HTMLSchematicLanguageButtonElement;
     'schematic-language-switcher': HTMLSchematicLanguageSwitcherElement;
@@ -698,6 +743,7 @@ declare global {
     'schematic-select-item': HTMLSchematicSelectItemElement;
     'schematic-select-search': HTMLSchematicSelectSearchElement;
     'schematic-sign-in': HTMLSchematicSignInElement;
+    'schematic-tabs': HTMLSchematicTabsElement;
     'schematic-uploader': HTMLSchematicUploaderElement;
     'schematic-user-invite-link': HTMLSchematicUserInviteLinkElement;
   }

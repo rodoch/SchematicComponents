@@ -9,6 +9,7 @@ export class ResourceList {
     @State() hasContent: boolean = true;
     @State() html: string;
     @Prop() url: string;
+    @Prop() facets: string;
     @Prop() noContent: string = 'No result found';
     @Prop({ mutable: true, reflectToAttr: true }) activeResourceId: string;
     @Event() activeResourceSet: EventEmitter;
@@ -50,6 +51,7 @@ export class ResourceList {
         }
 
         formData.append('ActiveResourceID', this.activeResourceId);
+        formData.append('Facets', this.facets);
 
         const config: RequestInit = {
             method: 'post',

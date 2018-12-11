@@ -3,7 +3,6 @@ import { Component, Element, State, Prop, Method, Watch, Event, EventEmitter } f
 @Component({
     tag: 'schematic-resource-filters'
 })
-
 export class ResourceFilters {
     @Element() filters: HTMLStencilElement;
     @State() loading: boolean;

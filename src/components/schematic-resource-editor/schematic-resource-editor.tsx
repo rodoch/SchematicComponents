@@ -10,6 +10,7 @@ export class ResourceEditor {
     @State() editorClass: string;
     @State() loading: boolean;
     @State() html: string;
+    @Prop() facets: string;
     @Prop() url: string;
     @Prop({ mutable: true, reflectToAttr: true }) resourceId: string;
     @Prop() placeholder: string;
@@ -61,7 +62,9 @@ export class ResourceEditor {
     @Method()
     newResource(messageOnComplete: string) {
         this.editorMode = 'create';
-        const createUrl = this.urlBuilder('create');
+        let createUrl = this.urlBuilder('create');
+        createUrl += "?facets=" + this.facets;
+        console.log(createUrl);
         const config: RequestInit = {
             method: 'get',
             credentials: 'same-origin'
@@ -74,6 +77,7 @@ export class ResourceEditor {
         const createUrl = this.urlBuilder('create');
         const form: HTMLFormElement = this.editor.querySelector('.resource-editor__form');
         const formData: FormData = new FormData(form);
+        formData.append('facets', this.facets);
         const config: RequestInit = {
             method: 'post',
             body: formData,
@@ -88,6 +92,8 @@ export class ResourceEditor {
         const readUrl = this.urlBuilder('read');
         let formData: FormData = new FormData();
         formData.append('id', id);
+        formData.append('facets', this.facets);
+        console.log(formData);
         const config: RequestInit = {
             method: 'post',
             body: formData,
@@ -104,6 +110,8 @@ export class ResourceEditor {
         const form: HTMLFormElement = this.editor.querySelector('.resource-editor__form');
         let formData: FormData = new FormData(form);
         formData.append('id', id);
+        formData.append('facets', this.facets);
+        console.log(formData);
         const config: RequestInit = {
             method: 'post',
             body: formData,
@@ -119,6 +127,7 @@ export class ResourceEditor {
         const form: HTMLFormElement = this.editor.querySelector('.resource-editor__form');
         let formData: FormData = new FormData(form);
         formData.append('id', id);
+        formData.append('facets', this.facets);
         const config: RequestInit = {
             method: 'post',
             body: formData,

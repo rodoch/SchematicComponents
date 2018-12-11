@@ -100,10 +100,23 @@ export class ResourceExplorer {
         }
     }
 
+    getUrlParameter(name: string) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    };
+
     updateHistory(resourceId: string) {
-        const title = document.title;
-        let url = location.protocol + '//' + location.host + location.pathname;
+        const title: string = document.title;
+        let url: string = location.protocol + '//' + location.host + location.pathname;
         url += "?id=" + resourceId;
+
+        const facets: string = this.getUrlParameter('facets');
+
+        if (facets && facets.length > 0) {
+            url += "&facets=" + facets;
+        }
 
         if (resourceId === "0") {
             history.replaceState({resourceId: resourceId}, title, url);
@@ -118,6 +131,13 @@ export class ResourceExplorer {
         const title = this.initialPageTitle;
         let url = location.protocol + '//' + location.host + location.pathname;
         url += "?id=0";
+
+        const facets: string = this.getUrlParameter('facets');
+
+        if (facets && facets.length > 0) {
+            url += "&facets=" + facets;
+        }
+        
         history.pushState({resourceId: "0"}, title, url);
         this.urlUpdated.emit();
     }

@@ -9,7 +9,6 @@ enum Modes {
 @Component({
     tag: 'schematic-sign-in'
 })
-
 export class SignIn {
     @Element() authentication: HTMLStencilElement;
     @State() html: string;
